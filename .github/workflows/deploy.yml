@@ -8,6 +8,9 @@ on:
       NAMESPACE:
         type: string
         required: true
+      ENVIRONMENT:
+        type: string
+        required: true
     secrets:
       PROJECT_ID:
         required: true
@@ -35,7 +38,7 @@ jobs:
     # Setup application manifest
     - uses: danielr1996/envsubst-action@1.0.0
       env:
-        IMAGE_TAG: sha-${{ steps.tags.outputs.sha_short }}
+        IMAGE_TAG: ${{ inputs.ENVIRONMENT }}-sha-${{ steps.tags.outputs.sha_short }}
         INGRESS_HOST: ${{ inputs.INGRESS_HOST }}
         NAMESPACE: ${{ inputs.NAMESPACE }}
       with:

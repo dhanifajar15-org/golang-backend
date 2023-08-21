@@ -26,6 +26,7 @@ jobs:
     with:
       INGRESS_HOST: dev-golang-backend.dhani.cloud
       NAMESPACE: development
+      ENVIRONMENT: dev
     secrets:
       PROJECT_ID: ${{ secrets.PROJECT_ID }}
       APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
