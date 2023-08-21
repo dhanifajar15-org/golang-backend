@@ -1,12 +1,12 @@
-name: Feature
+name: Staging
 on:
   workflow_dispatch:
   push:
     branches:
-    - feature/*
+    - staging
   pull_request:
     branches:
-    - develop
+    - master
 jobs:
   test:
     name: Test
@@ -17,7 +17,7 @@ jobs:
     needs:
     - test
     with:
-      ENVIRONMENT: feature
+      ENVIRONMENT: stg
     secrets:
       USERNAME: ${{ secrets.DOCKER_USERNAME }}
       PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
@@ -27,11 +27,12 @@ jobs:
     needs:
     - docker
     with:
-      INGRESS_HOST: feature-${{github.sha}}.34.142.207.149.nip.io
-      NAMESPACE: feature-${{github.sha}}
-      ENVIRONMENT: feature
+      INGRESS_HOST: stg-${{github.sha}}.34.142.207.149.nip.io
+      NAMESPACE: staging
+      ENVIRONMENT: stg
     secrets:
       PROJECT_ID: ${{ secrets.PROJECT_ID }}
       APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
       CLUSTER_NAME: ${{ secrets.CLUSTER_NAME }}
       ZONE_NAME: ${{ secrets.ZONE_NAME }}
+
