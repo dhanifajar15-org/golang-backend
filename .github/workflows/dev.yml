@@ -4,6 +4,9 @@ on:
   push:
     branches:
     - develop
+  pull_request:
+    branches:
+    - staging
 jobs:
   test:
     name: Test
@@ -24,7 +27,7 @@ jobs:
     needs:
     - docker
     with:
-      INGRESS_HOST: dev-golang-backend.dhani.cloud
+      INGRESS_HOST: dev-${{github.sha}}.34.142.207.149.nip.io
       NAMESPACE: development
       ENVIRONMENT: dev
     secrets:

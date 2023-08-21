@@ -1,9 +1,12 @@
-name: Production
+name: Hotfix
 on:
   workflow_dispatch:
   push:
-    tags:
-    - 'v*'
+    branches:
+    - hotfix/*
+  pull_request:
+    branches:
+    - master
 jobs:
   test:
     name: Test
@@ -14,7 +17,7 @@ jobs:
     needs:
     - test
     with:
-      ENVIRONMENT: prod
+      ENVIRONMENT: hotfix
     secrets:
       USERNAME: ${{ secrets.DOCKER_USERNAME }}
       PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
@@ -24,12 +27,11 @@ jobs:
     needs:
     - docker
     with:
-      INGRESS_HOST: prod-${{github.sha}}.34.142.207.149.nip.io
-      NAMESPACE: production
-      ENVIRONMENT: prod
+      INGRESS_HOST: hotfix-${{github.sha}}.34.142.207.149.nip.io
+      NAMESPACE: hotfix-${{github.sha}}
+      ENVIRONMENT: hotfix
     secrets:
       PROJECT_ID: ${{ secrets.PROJECT_ID }}
       APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
       CLUSTER_NAME: ${{ secrets.CLUSTER_NAME }}
       ZONE_NAME: ${{ secrets.ZONE_NAME }}
-
