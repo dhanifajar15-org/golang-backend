@@ -44,18 +44,21 @@ In this documentation, I detail the setup and workflow of the CI/CD process that
 
   - Deploys the Dockerized application to GKE via tags.
   - Triggered by tagging a version (e.g., v1.0) on the `master` branch.
-
+![Alt text](assets/picture-7.png)
 ## Branching Strategy
 
 - The code flow is governed by three main branches: develop, staging, and master (production).
 - Additional temporary branches, such as hotfix and feature, are used for specific purposes.
 
+
 ## Docker Process
 
-- The Dockerization process involves a multi-stage build approach.
+- The Dockerization process involves a multi-stage build approach. This helps in minimizing the size of the final container and improving run time performance.
 
 ## Custom CI/CD Setup per Branch
 
 - A distinctive aspect of our CI/CD setup is the customization for each branch, particularly focusing on wildcard branches like hotfix and feature.
 - Each of these branches is equipped with dedicated jobs for  testing, Dockerization, and deployment to Kubernetes.
 - Domains are generated based on the branch name and commit number, with 'nip.io' serving as the wildcard domain provider. For instance, `feature-${{github.sha}}.34.142.207.149.nip.io`.
+
+![image-20230821212936760](/assets/picture-6.png)
