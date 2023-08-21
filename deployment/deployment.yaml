@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: golang-backend
-        image: dhanifajar15/golang-boilerplate:${IMAGE_TAG}
+        image: dhanifajar15/golang-backend:${IMAGE_TAG}
         imagePullPolicy: Always
         ports:
           - containerPort: 3000
