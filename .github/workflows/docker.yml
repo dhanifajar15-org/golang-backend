@@ -1,6 +1,10 @@
 name: Docker
 on:
   workflow_call:
+    inputs:
+      ENVIRONMENT:
+        type: string
+        required: true
     secrets:
       USERNAME:
         required: true
@@ -30,11 +34,11 @@ jobs:
       run: >-
         docker
         build
-        -t dhanifajar15/golang-boilerplate:sha-${{ steps.tags.outputs.sha_short }}
+        -t dhanifajar15/golang-backend:${{ inputs.ENVIRONMENT }}-sha-${{ steps.tags.outputs.sha_short }}
         -f Dockerfile
         .
     - name: Push sha-${{ steps.tags.outputs.sha_short }}
       run: >-
         docker
         push
-        dhanifajar15/golang-boilerplate:sha-${{ steps.tags.outputs.sha_short }}
+        dhanifajar15/golang-backend:${{ inputs.ENVIRONMENT }}-sha-${{ steps.tags.outputs.sha_short }}

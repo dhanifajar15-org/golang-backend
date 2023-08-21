@@ -13,6 +13,8 @@ jobs:
     uses: ./.github/workflows/docker.yml
     needs:
     - test
+    with:
+      ENVIRONMENT: prod
     secrets:
       USERNAME: ${{ secrets.DOCKER_USERNAME }}
       PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
