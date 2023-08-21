@@ -1,0 +1,32 @@
+name: Production
+on:
+  workflow_dispatch:
+  push:
+    tags:
+    - 'v*'
+jobs:
+  test:
+    name: Test
+    uses: ./.github/workflows/test.yml
+  docker:
+    name: Containerization
+    uses: ./.github/workflows/docker.yml
+    needs:
+    - test
+    secrets:
+      USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  deploy:
+    name: Deployment
+    uses: ./.github/workflows/deploy.yml
+    needs:
+    - docker
+    with:
+      INGRESS_HOST: prod-golang-backend.dhani.cloud
+      NAMESPACE: production
+    secrets:
+      PROJECT_ID: ${{ secrets.PROJECT_ID }}
+      APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      CLUSTER_NAME: ${{ secrets.CLUSTER_NAME }}
+      ZONE_NAME: ${{ secrets.ZONE_NAME }}
+
