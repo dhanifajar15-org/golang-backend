@@ -24,7 +24,7 @@ jobs:
     needs:
     - docker
     with:
-      INGRESS_HOST: prod-golang-backend.dhani.cloud
+      INGRESS_HOST: prod-${{github.sha}}.34.142.207.149.nip.io
       NAMESPACE: production
       ENVIRONMENT: prod
     secrets:

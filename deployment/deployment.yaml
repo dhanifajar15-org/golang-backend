@@ -55,8 +55,6 @@ metadata:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  tls:
-  - secretName: dhani-cloud-tls
   rules:
   - host:  ${INGRESS_HOST}
     http:

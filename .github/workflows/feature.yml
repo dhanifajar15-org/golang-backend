@@ -24,7 +24,7 @@ jobs:
     needs:
     - docker
     with:
-      INGRESS_HOST: feature-${{github.sha}}.34.142.207.149.xip.io
+      INGRESS_HOST: feature-${{github.sha}}.34.142.207.149.nip.io
       NAMESPACE: feature-${{github.sha}}
       ENVIRONMENT: feature
     secrets:
